@@ -273,6 +273,7 @@ void score_screen()
 	cout << "\n **************GAME  OVER***************\n\n\n";
 	cout << " SCORE: " << score << "\n\n Press any key to return to title screen.";
 	_getch();
+	system("CLS");
 }
 
 void hide_cursor() {
