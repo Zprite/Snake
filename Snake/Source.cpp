@@ -94,7 +94,9 @@ int select_difficulty()
 			cursor[i] = ' ';
 		}
 		cursor[cursorPos]='>';
-		system("CLS");
+		// Instead of using system("CLS"), change cursor pos to top and redraw.
+		COORD newpos = { 0,0 }; //position to 0, 0
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), newpos);
 		cout << " --------SNAKE--------\n\n"
 			<< " Select dificulty: \n\n"
 			<< cursor[0] << "Easy \n"
