@@ -26,6 +26,7 @@ int tail_length;
 int fruitX;
 int fruitY;
 
+void hide_cursor();
 int select_difficulty();
 void print_board();
 void set_walls();
@@ -38,6 +39,7 @@ void score_screen();
 
 int main() 
 {	
+	hide_cursor();
 	exit_game = false;
 	do {
 		int difficulty=select_difficulty(); // Start program with difficulty select screen
@@ -48,9 +50,9 @@ int main()
 			return 0;
 		}
 		// Dificulty adjusts the speed of the game. The speed value adjusts delay after each frame (ms).
-		if (difficulty == EASY) { speed = 100; } 
-		else if (difficulty == HARD) { speed = 50; }
-		else if (difficulty == INSANE) { speed = 25; }
+		if (difficulty == EASY) { speed = 150; } 
+		else if (difficulty == HARD) { speed = 100; }
+		else if (difficulty == INSANE) { speed = 50; }
 		Sleep(50);
 		score = 0;
 		tail_length = 0;
@@ -230,7 +232,10 @@ void set_walls()  // Set map borders to be walls ('#'). Fill in the rest with em
 
 void print_board()
 {
-	system("CLS");
+	// Instead of using system("CLS"), change cursor pos to top and redraw.
+	COORD newpos = { 0,0 }; //position to 0, 0
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), newpos);
+
 	for (int i = 0; i < HEIGHT; i++)
 	{
 		for (int j = 0; j < WIDTH; j++)
@@ -266,4 +271,14 @@ void score_screen()
 	cout << "\n **************GAME  OVER***************\n\n\n";
 	cout << " SCORE: " << score << "\n\n Press any key to return to title screen.";
 	_getch();
+}
+
+void hide_cursor() {
+	HANDLE hOut;
+	CONSOLE_CURSOR_INFO ConCurInf;
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	ConCurInf.dwSize = 10;
+	ConCurInf.bVisible = FALSE;
+	SetConsoleCursorInfo(hOut, &ConCurInf);
+
 }
