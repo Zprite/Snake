@@ -98,7 +98,7 @@ int select_difficulty()
 		COORD newpos = { 0,0 }; //position to 0, 0
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), newpos);
 		cout << " --------SNAKE--------\n\n"
-			<< " Select dificulty: \n\n"
+			<< " Select difficulty: \n\n"
 			<< cursor[0] << "Easy \n"
 			<< cursor[1] << "Hard \n"
 			<< cursor[2] << "Insane \n\n\n"
