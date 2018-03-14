@@ -305,12 +305,11 @@ void score_screen()
 		} else
 		{
 			cout << "ERROR: FAILED TO OPEN SAVE FILE!!\n";
+			cout << "\n\n Press any key to return to title screen.";
+			_getch();
 		}
-	 cout << "\n\n Press any key to return to title screen.";
-	
 	 system("CLS");
  }
-
 
 void hide_cursor() {
 	HANDLE hOut;
