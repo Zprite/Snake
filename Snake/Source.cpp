@@ -3,6 +3,9 @@
 #include <conio.h>
 #include <Windows.h>
 #include <time.h>
+#include <fstream>
+#include <string>
+#include <vector>
 #define WIDTH 15
 #define HEIGHT 15
 #define SnakeMark 254 // ASCII square
@@ -269,12 +272,45 @@ void print_board()
 
 void score_screen()
 {
+	string line;
+	string name;
+	bool file_found = false;
+
 	system("CLS");
-	cout << "\n **************GAME  OVER***************\n\n\n";
-	cout << " SCORE: " << score << "\n\n Press any key to return to title screen.";
-	_getch();
-	system("CLS");
-}
+	cout << "\n **************GAME  OVER***************\n\n\n"
+		<< "Enter name to save score: (Press Esc to continue without saving)\n\n";
+		ifstream Scores_out;
+		Scores_out.open("Scores.txt");
+		if (Scores_out.is_open()) // READ SCORES FROM Scores.txt
+		{
+			file_found = true;
+			Scores_out.seekg(ios::beg);
+			while (getline(Scores_out, line))
+			{
+				cout << "SCORE: " << line << '\n';
+			}
+			Scores_out.close();
+		}
+		if (file_found == true) { // WRITE SCORE TO Scores.txt
+			fstream Scores_in;
+			Scores_in.open("Scores.txt");
+			if (Scores_in.is_open())
+			{
+				Scores_in.seekg(0, ios::end);
+				cout << "SCORE: " << score << "  ";
+				cin >> name;
+				Scores_in << score << "  " << name << endl;
+			}
+			Scores_in.close();
+		} else
+		{
+			cout << "ERROR: FAILED TO OPEN SAVE FILE!!\n";
+		}
+	 cout << "\n\n Press any key to return to title screen.";
+	
+	 system("CLS");
+ }
+
 
 void hide_cursor() {
 	HANDLE hOut;
@@ -283,5 +319,4 @@ void hide_cursor() {
 	ConCurInf.dwSize = 10;
 	ConCurInf.bVisible = FALSE;
 	SetConsoleCursorInfo(hOut, &ConCurInf);
-
 }
