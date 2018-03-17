@@ -272,12 +272,15 @@ void print_board()
 
 void score_screen()
 {
+	/*
 	string line;
 	string name;
 	bool file_found = false;
+	*/
 
 	system("CLS");
-	cout << "\n **************GAME  OVER***************\n\n\n"
+	cout << "\n **************GAME  OVER***************\n\n\n";
+		/*
 		<< "Enter name to save score: (Press Esc to continue without saving)\n\n";
 		ifstream Scores_out;
 		Scores_out.open("Scores.txt");
@@ -308,6 +311,9 @@ void score_screen()
 			cout << "\n\n Press any key to return to title screen.";
 			_getch();
 		}
+	*/
+	 cout << "\n\n Press any key to return to title screen.";
+	_getch();
 	 system("CLS");
  }
 
